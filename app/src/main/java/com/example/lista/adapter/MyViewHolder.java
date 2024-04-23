@@ -1,4 +1,4 @@
-package com.example.lista.activity;
+package com.example.lista.adapter;
 
 import android.view.View;
 

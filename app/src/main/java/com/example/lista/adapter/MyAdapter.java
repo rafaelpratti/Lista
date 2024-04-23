@@ -1,4 +1,4 @@
-package com.example.lista.activity;
+package com.example.lista.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.lista.activity.MainActivity;
+import com.example.lista.activity.MyItem;
 
 import java.util.List;
 import dettmann.pratti.rafael.lista.R;
@@ -44,12 +47,12 @@ public class MyAdapter extends RecyclerView.Adapter{
         imvfoto.setImageURI(myItem.photo);
         TextView tvTitle = v.findViewById(R.id.tvTitle);
         tvTitle.setText(myItem.title);
-        TextView tvdesc = v.findViewById(R.id.etDesc);
+        TextView tvdesc = v.findViewById(R.id.tvDesc);
         tvdesc.setText(myItem.description);
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount(){
         return itens.size();
     }
 }

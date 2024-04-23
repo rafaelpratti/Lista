@@ -1,12 +1,16 @@
 package com.example.lista.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.lista.adapter.MyAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -39,7 +43,24 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, NewItemActivity.class);
                 startActivityForResult(i, NEW_ITEM_REQUEST);
             }
+
         });
+
+        //obtendo rv
+        RecyclerView rvItens = findViewById(R.id.rvItens);
+        // criado o adapter e setado no rv
+        myAdapter = new MyAdapter(this, itens);
+        rvItens.setAdapter(myAdapter);
+        //indica ao rv que não há variação de tamanho entre os itens da lista (todos têm tamanho igual)
+        rvItens.setHasFixedSize(true);
+
+        // criando um gerenciador de layout linear no rv
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        rvItens.setLayoutManager(layoutManager);
+
+        //cria uma linha que separa os itens no rv
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(), DividerItemDecoration.VERTICAL);
+        rvItens.addItemDecoration(dividerItemDecoration);
 
     }
 
@@ -58,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 myItem.photo = data.getData();
                 // adicionando na lista
                 itens.add(myItem);
+                //notifica a activity que novos itens foram criados e os exibe
+                myAdapter.notifyItemInserted(itens.size()-1);
             }
         }
     }
