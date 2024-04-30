@@ -40,6 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter{
     }
 
     @Override
+    // recebe o ViewHolder criado por onCreateViewHolder e preenche os elementos de interface com os dados do item
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyItem myItem = itens.get(position);
         View v = holder.itemView;
@@ -52,6 +53,7 @@ public class MyAdapter extends RecyclerView.Adapter{
     }
 
     @Override
+    // retorna a quantidade de itens a serem adicionados
     public int getItemCount(){
         return itens.size();
     }

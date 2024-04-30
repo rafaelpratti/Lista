@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     // identificador para cada chamada para a criação dos itens
     static int NEW_ITEM_REQUEST = 1;
+    // ArrayList de itens
     List<MyItem> itens = new ArrayList<>();
     // adapter para a lista
     MyAdapter myAdapter;

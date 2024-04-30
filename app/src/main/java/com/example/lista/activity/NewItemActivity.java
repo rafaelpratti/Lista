@@ -51,7 +51,7 @@ public class NewItemActivity extends AppCompatActivity {
         Button btnAddItem = findViewById(R.id.btnAddItem);
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
-            // executado quando é clicado
+            // executado quando o botão de adicionar item é clicado
             public void onClick(View v) {
                 // Mensagem se não for selecionada imagem
                 if(photoSelected == null){
