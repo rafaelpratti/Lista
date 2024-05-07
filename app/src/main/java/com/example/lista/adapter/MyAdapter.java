@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lista.activity.MainActivity;
-import com.example.lista.activity.MyItem;
+import com.example.lista.model.MyItem;
 
 import java.util.List;
 import dettmann.pratti.rafael.lista.R;
@@ -45,7 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter{
         MyItem myItem = itens.get(position);
         View v = holder.itemView;
         ImageView imvfoto = v.findViewById(R.id.imvPhoto);
-        imvfoto.setImageURI(myItem.photo);
+        imvfoto.setImageBitmap(myItem.photo);
         TextView tvTitle = v.findViewById(R.id.tvTitle);
         tvTitle.setText(myItem.title);
         TextView tvdesc = v.findViewById(R.id.tvDesc);

@@ -14,6 +14,9 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.lista.model.NewItemActivityViewModel;
 
 import dettmann.pratti.rafael.lista.R;
 
@@ -22,14 +25,20 @@ public class NewItemActivity extends AppCompatActivity {
     // Id para a chamada
     static int PHOTO_PICKER_REQUEST = 1;
 
-    //variável que guarda o endereço da imagem, e não o arquivo em si
-    Uri photoSelected = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_new_item);
+
+        NewItemActivityViewModel vm = new ViewModelProvider( this ).get(NewItemActivityViewModel.class );
+        Uri selectPhotoLocation = vm.getSelectPhotoLocation();
+        if(selectPhotoLocation != null) {
+            ImageView imvfotoPreview = findViewById(R.id.imvPhotoPreview);
+            imvfotoPreview.setImageURI(selectPhotoLocation);
+        }
+
 
         //Obtendo o botão que adiciona imagens
         ImageButton imgCl = findViewById(R.id.imbCl);
@@ -54,10 +63,10 @@ public class NewItemActivity extends AppCompatActivity {
             // executado quando o botão de adicionar item é clicado
             public void onClick(View v) {
                 // Mensagem se não for selecionada imagem
+                Uri photoSelected = vm.getSelectPhotoLocation();
                 if(photoSelected == null){
                     Toast.makeText(NewItemActivity.this, "É necessário selecionar uma imagem!",Toast.LENGTH_LONG).show();
                     return;
-
                 }
 
                 // obtendo o titulo e convertendo pra str
@@ -103,11 +112,16 @@ public class NewItemActivity extends AppCompatActivity {
                 // verifica se o código de sucesso
                 if (resultCode == Activity.RESULT_OK){
                     // obtêm o endereço da imagem e guarda na variável photoSelected
-                    photoSelected = data.getData();
+                    Uri photoSelected = data.getData();
                     // obtêm o objeto PhotoPreview
                     ImageView imvfotoPreview = findViewById(R.id.imvPhotoPreview);
                     // exibe a imagem no PhotoPreview
                     imvfotoPreview.setImageURI(photoSelected);
+
+                    // obtendo o vm e guardando o Uri da imagem dentro dele
+                    NewItemActivityViewModel vm = new ViewModelProvider( this).get( NewItemActivityViewModel.class );
+                    vm.setSelectPhotoLocation(photoSelected);
+
                 }
             }
 

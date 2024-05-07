@@ -1,10 +1,11 @@
-package com.example.lista.activity;
+package com.example.lista.model;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 public class MyItem {
-    // photo guarda o Uri da imagem
-    public Uri photo;
+    // photo guarda o Bitmap da imagem
+    public Bitmap photo;
 
     // variável de título
     public String title;
